@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOKA COFFEE | 野花珈琲 渋谷</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:   #f8f3ec;
+      --warm:    #e8ddd0;
+      --brown:   #6b4c35;
+      --dark:    #2c1f14;
+      --sage:    #8a9e7e;
+      --accent:  #c0855a;
+      --text:    #3d2e22;
+      --muted:   #8a7a6d;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    /* ── NAV ─────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(248, 243, 236, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--warm);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; letter-spacing: 0.12em;
+      color: var(--brown); text-decoration: none;
+    }
+    .nav-logo span { font-style: italic; color: var(--accent); }
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--brown); }
+
+    /* ── HERO ────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+      padding: 7rem 4rem 4rem;
+      gap: 4rem;
+    }
+    .hero-text { max-width: 540px; }
+    .hero-eyebrow {
+      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 1.2rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      line-height: 1.15; color: var(--dark);
+      margin-bottom: 0.4rem;
+    }
+    .hero-title em { font-style: italic; color: var(--accent); }
+    .hero-sub {
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      color: var(--muted); margin: 1.4rem 0 2.4rem;
+      font-weight: 300;
+    }
+    .hero-cta {
+      display: inline-block;
+      padding: 0.85rem 2.4rem;
+      background: var(--brown); color: var(--cream);
+      font-size: 0.82rem; letter-spacing: 0.16em; text-transform: uppercase;
+      text-decoration: none; border-radius: 2px;
+      transition: background .25s, transform .2s;
+    }
+    .hero-cta:hover { background: var(--dark); transform: translateY(-2px); }
+    .hero-image-wrap {
+      border-radius: 4px; overflow: hidden;
+      aspect-ratio: 4/5; position: relative;
+    }
+    .hero-image-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .placeholder-img {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 0.6rem;
+      font-size: 0.75rem; letter-spacing: 0.1em; color: #fff;
+      background: linear-gradient(135deg, #c0855a 0%, #6b4c35 60%, #2c1f14 100%);
+    }
+    .placeholder-img .icon { font-size: 2.4rem; opacity: .6; }
+
+    /* ── SECTION COMMON ───────────────────────── */
+    section { padding: 6rem 4rem; }
+    .section-header { text-align: center; margin-bottom: 3.6rem; }
+    .section-label {
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--dark);
+    }
+    .section-title em { font-style: italic; color: var(--accent); }
+    .divider {
+      width: 40px; height: 2px;
+      background: var(--accent); margin: 1.2rem auto 0;
+    }
+
+    /* ── MENU ────────────────────────────────── */
+    #menu { background: #fff; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem; max-width: 1100px; margin: 0 auto;
+    }
+    .menu-card {
+      border-radius: 6px; overflow: hidden;
+      background: var(--cream);
+      transition: transform .3s, box-shadow .3s;
+      cursor: default;
+    }
+    .menu-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(44,31,20,.12);
+    }
+    .menu-thumb {
+      aspect-ratio: 4/3;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; position: relative; overflow: hidden;
+    }
+    .menu-thumb.coffee { background: linear-gradient(135deg, #c8a882 0%, #8b5c2a 100%); }
+    .menu-thumb.latte  { background: linear-gradient(135deg, #e8d5b7 0%, #c0855a 100%); }
+    .menu-thumb.cake   { background: linear-gradient(135deg, #f5e6d0 0%, #d4956e 100%); }
+    .menu-thumb.toast  { background: linear-gradient(135deg, #f2ddb5 0%, #c99a4e 100%); }
+    .menu-info { padding: 1.2rem 1.4rem 1.6rem; }
+    .menu-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; color: var(--dark); margin-bottom: 0.3rem;
+    }
+    .menu-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; margin-bottom: 0.8rem; }
+    .menu-price {
+      font-size: 0.85rem; font-weight: 500;
+      color: var(--accent); letter-spacing: 0.04em;
+    }
+    .menu-tag {
+      display: inline-block; margin-right: 0.4rem;
+      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.2rem 0.6rem; border-radius: 20px;
+      background: var(--warm); color: var(--brown);
+    }
+
+    /* ── FEATURES ────────────────────────────── */
+    #features { background: var(--cream); }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2.4rem; max-width: 1000px; margin: 0 auto;
+    }
+    .feature-card {
+      text-align: center; padding: 2.4rem 2rem;
+      border-radius: 6px; background: #fff;
+      border-top: 3px solid var(--accent);
+    }
+    .feature-icon {
+      font-size: 2.4rem; margin-bottom: 1rem; display: block;
+    }
+    .feature-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; color: var(--dark);
+      margin-bottom: 0.6rem;
+    }
+    .feature-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.8; }
+
+    /* ── ACCESS ──────────────────────────────── */
+    #access { background: var(--dark); color: var(--cream); }
+    #access .section-title { color: var(--cream); }
+    #access .section-label { color: var(--sage); }
+    .access-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; max-width: 1000px; margin: 0 auto; align-items: start;
+    }
+    .access-map {
+      border-radius: 6px; overflow: hidden;
+      aspect-ratio: 4/3; background: #3d2e22;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 0.8rem;
+      color: var(--muted); font-size: 0.8rem; letter-spacing: 0.1em;
+    }
+    .access-map .map-icon { font-size: 2.4rem; opacity: .5; }
+    .access-list { list-style: none; display: flex; flex-direction: column; gap: 1.6rem; }
+    .access-item {}
+    .access-label {
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 0.3rem;
+    }
+    .access-value { font-size: 0.95rem; color: var(--cream); line-height: 1.7; }
+    .hours-table { border-collapse: collapse; width: 100%; margin-top: 0.4rem; }
+    .hours-table td {
+      padding: 0.2rem 0; font-size: 0.88rem; color: var(--warm);
+    }
+    .hours-table td:first-child { width: 6em; color: var(--muted); }
+
+    /* ── CONTACT ─────────────────────────────── */
+    #contact {
+      background: var(--warm);
+      text-align: center; padding: 5rem 4rem;
+    }
+    #contact .section-title { color: var(--dark); }
+    #contact p {
+      color: var(--muted); font-size: 0.9rem; margin: 1rem 0 2.4rem; max-width: 440px; margin-left: auto; margin-right: auto;
+    }
+    .contact-btn {
+      display: inline-block;
+      padding: 1rem 3rem;
+      background: var(--accent); color: #fff;
+      font-size: 0.85rem; letter-spacing: 0.18em; text-transform: uppercase;
+      text-decoration: none; border-radius: 2px;
+      transition: background .25s, transform .2s;
+    }
+    .contact-btn:hover { background: var(--brown); transform: translateY(-2px); }
+
+    /* ── FOOTER ──────────────────────────────── */
+    footer {
+      background: var(--dark); color: var(--muted);
+      text-align: center; padding: 2rem;
+      font-size: 0.75rem; letter-spacing: 0.1em;
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.6rem; }
+      .nav-links { gap: 1.4rem; }
+      #hero { grid-template-columns: 1fr; padding: 6rem 1.6rem 3rem; gap: 2.4rem; }
+      .hero-image-wrap { max-width: 480px; margin: 0 auto; }
+      section { padding: 4rem 1.6rem; }
+      .features-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+      .access-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .menu-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ────────── NAV ────────── -->
+<nav>
+  <a class="nav-logo" href="#">NOKA <span>Coffee</span></a>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#features">About</a></li>
+    <li><a href="#access">Access</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ────────── HERO ────────── -->
+<section id="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Shibuya, Tokyo — Since 2022</p>
+    <h1 class="hero-title">
+      一杯に、<em>野花</em>の<br>やさしさを。
+    </h1>
+    <p class="hero-sub">
+      渋谷の喧騒を離れ、自然の恵みを感じる<br>
+      スペシャルティコーヒーとフードをどうぞ。
+    </p>
+    <a class="hero-cta" href="#menu">メニューを見る</a>
+  </div>
+  <div class="hero-image-wrap">
+    <img src="hero.png" alt="NOKA COFFEE — コーヒーとチーズケーキ" />
+  </div>
+</section>
+
+<!-- ────────── MENU ────────── -->
+<section id="menu">
+  <div class="section-header">
+    <p class="section-label">Our Menu</p>
+    <h2 class="section-title">こだわりの<em>一品</em></h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="menu-grid">
+
+    <div class="menu-card">
+      <div class="menu-thumb coffee">☕</div>
+      <div class="menu-info">
+        <span class="menu-tag">Hot</span>
+        <h3 class="menu-name">シングルオリジン ドリップ</h3>
+        <p class="menu-desc">エチオピア産の豆を浅煎りで丁寧にハンドドリップ。フルーティな余韻が広がります。</p>
+        <p class="menu-price">¥ 680</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-thumb latte">🥛</div>
+      <div class="menu-info">
+        <span class="menu-tag">Hot</span><span class="menu-tag">Iced</span>
+        <h3 class="menu-name">野花ラテ</h3>
+        <p class="menu-desc">自家製ラベンダーシロップとエスプレッソを合わせた、当店自慢のシグネチャーラテ。</p>
+        <p class="menu-price">¥ 780</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-thumb cake">🍰</div>
+      <div class="menu-info">
+        <span class="menu-tag">Sweets</span>
+        <h3 class="menu-name">バスクチーズケーキ</h3>
+        <p class="menu-desc">毎朝焼き上げる濃厚チーズケーキ。コーヒーとの相性は抜群です。</p>
+        <p class="menu-price">¥ 580</p>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-thumb toast">🍞</div>
+      <div class="menu-info">
+        <span class="menu-tag">Food</span>
+        <h3 class="menu-name">厚切りモーニングトースト</h3>
+        <p class="menu-desc">地元ベーカリー「パン結」の食パンを使用。自家製バターとジャムを添えて。</p>
+        <p class="menu-price">¥ 480</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ────────── FEATURES ────────── -->
+<section id="features">
+  <div class="section-header">
+    <p class="section-label">Why NOKA</p>
+    <h2 class="section-title">私たちの<em>こだわり</em></h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="features-grid">
+
+    <div class="feature-card">
+      <span class="feature-icon">🌿</span>
+      <h3 class="feature-title">サステナブルな豆の調達</h3>
+      <p class="feature-desc">
+        農家との直接取引（ダイレクトトレード）にこだわり、
+        生産者と環境に配慮したコーヒーだけをお届けします。
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🔥</span>
+      <h3 class="feature-title">店内自家焙煎</h3>
+      <p class="feature-desc">
+        スモールバッチで週3回焙煎。焙煎から48時間以内の
+        豆のみを使用し、常に最高の状態でご提供します。
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🛋️</span>
+      <h3 class="feature-title">居心地のいい空間</h3>
+      <p class="feature-desc">
+        無垢材と観葉植物に囲まれた落ち着いた店内。
+        Wi-Fi・電源完備でリモートワークにも最適です。
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ────────── ACCESS ────────── -->
+<section id="access">
+  <div class="section-header">
+    <p class="section-label">Access &amp; Hours</p>
+    <h2 class="section-title">アクセス・<em>営業時間</em></h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="access-inner">
+
+    <div class="access-map">
+      <span class="map-icon">📍</span>
+      <span>Google Map</span>
+    </div>
+
+    <ul class="access-list">
+      <li class="access-item">
+        <p class="access-label">Address</p>
+        <p class="access-value">〒150-0043<br>東京都渋谷区道玄坂2-10-7<br>NOKAビル 1F</p>
+      </li>
+      <li class="access-item">
+        <p class="access-label">Train</p>
+        <p class="access-value">
+          JR・東急各線「渋谷駅」<br>ハチ公口より徒歩 <strong style="color:#c0855a">5分</strong>
+        </p>
+      </li>
+      <li class="access-item">
+        <p class="access-label">Hours</p>
+        <table class="hours-table">
+          <tr><td>月〜金</td><td>08:00 – 21:00</td></tr>
+          <tr><td>土・日</td><td>09:00 – 20:00</td></tr>
+          <tr><td>定休日</td><td>毎月第1・第3月曜日</td></tr>
+        </table>
+      </li>
+      <li class="access-item">
+        <p class="access-label">Tel</p>
+        <p class="access-value">03-XXXX-XXXX</p>
+      </li>
+    </ul>
+
+  </div>
+</section>
+
+<!-- ────────── CONTACT ────────── -->
+<section id="contact">
+  <div class="section-header" style="margin-bottom:0">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">お問い合わせ</h2>
+    <div class="divider"></div>
+  </div>
+  <p>
+    ケータリング・貸切のご相談、メディア取材、その他のお問い合わせは<br>
+    下記よりお気軽にご連絡ください。通常2営業日以内にご返信いたします。
+  </p>
+  <a class="contact-btn" href="mailto:hello@nokacoffee.jp">メールで問い合わせる</a>
+</section>
+
+<!-- ────────── FOOTER ────────── -->
+<footer>
+  <p>&copy; 2024 NOKA COFFEE — 野花珈琲 渋谷　｜　<a href="#">Privacy Policy</a></p>
+</footer>
+
+</body>
+</html>
